@@ -15,9 +15,9 @@
     <!-- TOP BAR -->
     <div class="top-bar">
       <div class="actions">
-        <button>Create Envelope</button>
-        <button>Set Budget</button>
-        <button>Add spending</button>
+        <button id="btn-create-envelope">Create Envelope</button>
+        <button id="btn-set-budget">Set Budget</button>
+        <button id="btn-add-spending">Add spending</button>
       </div>
       <div class="total-budget">$900.00</div>
     </div>
@@ -37,79 +37,132 @@
     <!-- ENVELOPES -->
     <div class="envelopes">
       <!-- GROCERIES -->
-      <div class="card">
-        <div class="card-header">
+      <details class="card">
+        <summary class="card-header">
           <h2>Groceries</h2>
           <div>
             <span class="spent">-$50</span>
             <span class="balance">$100</span>
           </div>
-        </div>
+        </summary>
 
-        <div class="spending">
-          <span>Cereal</span>
-          <span>-$10</span>
-        </div>
-        <div class="spending">
-          <span>Rice</span>
-          <span>-$20</span>
-        </div>
-        <div class="spending">
-          <span>Beef</span>
-          <span>-$20</span>
-        </div>
+        <div class="card-details">
+          <div class="spending">
+            <span>Cereal</span>
+            <span>-$10</span>
+          </div>
+          <div class="spending">
+            <span>Rice</span>
+            <span>-$20</span>
+          </div>
+          <div class="spending">
+            <span>Beef</span>
+            <span>-$20</span>
+          </div>
 
-        <div class="original">Original budget: <span>$150</span></div>
-      </div>
+          <div class="original">Original budget: <span>$150</span></div>
+        </div>
+      </details>
 
       <!-- CLOTHING -->
-      <div class="card">
-        <div class="card-header">
+      <details class="card">
+        <summary class="card-header">
           <h2>Clothing</h2>
           <div>
             <span class="spent">-$40</span>
             <span class="balance">$10</span>
           </div>
-        </div>
+        </summary>
 
-        <div class="spending">
-          <span>Nike Shirt</span>
-          <span>-$40</span>
-        </div>
+        <div class="card-details">
+          <div class="spending">
+            <span>Nike Shirt</span>
+            <span>-$40</span>
+          </div>
 
-        <div class="original">Original budget: <span>$50</span></div>
-      </div>
+          <div class="original">Original budget: <span>$50</span></div>
+        </div>
+      </details>
 
       <!-- GAZ -->
-      <div class="card">
-        <div class="card-header">
+      <details class="card">
+        <summary class="card-header">
           <h2>Gaz</h2>
           <div>
             <span class="balance">$80</span>
           </div>
-        </div>
-      </div>
+        </summary>
+      </details>
 
       <!-- FOOD -->
-      <div class="card">
-        <div class="card-header">
+      <details class="card">
+        <summary class="card-header">
           <h2>Food</h2>
           <div>
             <span class="spent">-$100</span>
             <span class="balance">$200</span>
           </div>
-        </div>
-      </div>
+        </summary>
+      </details>
 
       <!-- CHILDREN ITEMS -->
-      <div class="card">
-        <div class="card-header">
+      <details class="card">
+        <summary class="card-header">
           <h2>Children's Items</h2>
           <div>
             <span class="balance">$320</span>
           </div>
+        </summary>
+      </details>
+    </div>
+
+    <!-- MODALS -->
+
+    <!-- Set Budget Modal -->
+    <div class="modal-overlay" id="modal-set-budget">
+      <div class="modal">
+        <h3>Set Budget</h3>
+        <label for="budget-amount">Total Budget</label>
+        <input type="number" id="budget-amount" placeholder="Enter amount" min="0" step="0.01" />
+        <div class="modal-actions">
+          <button class="btn-cancel">Cancel</button>
+          <button class="btn-confirm">Confirm</button>
         </div>
       </div>
     </div>
+
+    <!-- Create Envelope Modal -->
+    <div class="modal-overlay" id="modal-create-envelope">
+      <div class="modal">
+        <h3>Create Envelope</h3>
+        <label for="envelope-name">Envelope Name</label>
+        <input type="text" id="envelope-name" placeholder="e.g. Groceries" />
+        <label for="envelope-budget">Budget</label>
+        <input type="number" id="envelope-budget" placeholder="Enter amount" min="0" step="0.01" />
+        <div class="modal-actions">
+          <button class="btn-cancel">Cancel</button>
+          <button class="btn-confirm">Confirm</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Spending Modal -->
+    <div class="modal-overlay" id="modal-add-spending">
+      <div class="modal">
+        <h3>Add Spending</h3>
+        <label for="spending-envelope">Envelope</label>
+        <select id="spending-envelope"></select>
+        <label for="spending-name">Description</label>
+        <input type="text" id="spending-name" placeholder="e.g. Cereal" />
+        <label for="spending-amount">Amount</label>
+        <input type="number" id="spending-amount" placeholder="Enter amount" min="0" step="0.01" />
+        <div class="modal-actions">
+          <button class="btn-cancel">Cancel</button>
+          <button class="btn-confirm">Confirm</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/script.js"></script>
   </body>
 </html>

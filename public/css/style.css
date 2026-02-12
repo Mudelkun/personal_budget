@@ -122,16 +122,10 @@ button:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  cursor: pointer;
-  list-style: none;
 }
 
-.card-header::-webkit-details-marker {
-  display: none;
-}
-
-.card[open] .card-header {
-  margin-bottom: 20px;
+.card-header + .card-details {
+  margin-top: 20px;
 }
 
 .card-header h2 {

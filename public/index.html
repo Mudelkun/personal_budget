@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Envelope Budget</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- TOP BAR -->
+    <div class="top-bar">
+      <div class="actions">
+        <button>Create Envelope</button>
+        <button>Set Budget</button>
+        <button>Add spending</button>
+      </div>
+      <div class="total-budget">$900.00</div>
+    </div>
+
+    <!-- SUMMARY -->
+    <div class="summary">
+      <div class="summary-item">
+        <h1 class="red">-$500</h1>
+        <p>Spendings</p>
+      </div>
+      <div class="summary-item">
+        <h1 class="green">$400</h1>
+        <p>Available</p>
+      </div>
+    </div>
+
+    <!-- ENVELOPES -->
+    <div class="envelopes">
+      <!-- GROCERIES -->
+      <div class="card">
+        <div class="card-header">
+          <h2>Groceries</h2>
+          <div>
+            <span class="spent">-$50</span>
+            <span class="balance">$100</span>
+          </div>
+        </div>
+
+        <div class="spending">
+          <span>Cereal</span>
+          <span>-$10</span>
+        </div>
+        <div class="spending">
+          <span>Rice</span>
+          <span>-$20</span>
+        </div>
+        <div class="spending">
+          <span>Beef</span>
+          <span>-$20</span>
+        </div>
+
+        <div class="original">Original budget: <span>$150</span></div>
+      </div>
+
+      <!-- CLOTHING -->
+      <div class="card">
+        <div class="card-header">
+          <h2>Clothing</h2>
+          <div>
+            <span class="spent">-$40</span>
+            <span class="balance">$10</span>
+          </div>
+        </div>
+
+        <div class="spending">
+          <span>Nike Shirt</span>
+          <span>-$40</span>
+        </div>
+
+        <div class="original">Original budget: <span>$50</span></div>
+      </div>
+
+      <!-- GAZ -->
+      <div class="card">
+        <div class="card-header">
+          <h2>Gaz</h2>
+          <div>
+            <span class="balance">$80</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FOOD -->
+      <div class="card">
+        <div class="card-header">
+          <h2>Food</h2>
+          <div>
+            <span class="spent">-$100</span>
+            <span class="balance">$200</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CHILDREN ITEMS -->
+      <div class="card">
+        <div class="card-header">
+          <h2>Children's Items</h2>
+          <div>
+            <span class="balance">$320</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

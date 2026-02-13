@@ -15,8 +15,9 @@
     <!-- TOP BAR -->
     <div class="top-bar">
       <div class="actions">
-        <button id="btn-create-envelope">Create Envelope</button>
         <button id="btn-set-budget">Set Budget</button>
+        <button>Manage envelopes</button>
+        <button id="btn-create-envelope">Create Envelope</button>
         <button id="btn-add-spending">Add spending</button>
       </div>
       <div class="total-budget">$900.00</div>
@@ -123,7 +124,13 @@
       <div class="modal">
         <h3>Set Budget</h3>
         <label for="budget-amount">Total Budget</label>
-        <input type="number" id="budget-amount" placeholder="Enter amount" min="0" step="0.01" />
+        <input
+          type="number"
+          id="budget-amount"
+          placeholder="Enter amount"
+          min="0"
+          step="0.01"
+        />
         <div class="modal-actions">
           <button class="btn-cancel">Cancel</button>
           <button class="btn-confirm">Confirm</button>
@@ -138,7 +145,13 @@
         <label for="envelope-name">Envelope Name</label>
         <input type="text" id="envelope-name" placeholder="e.g. Groceries" />
         <label for="envelope-budget">Budget</label>
-        <input type="number" id="envelope-budget" placeholder="Enter amount" min="0" step="0.01" />
+        <input
+          type="number"
+          id="envelope-budget"
+          placeholder="Enter amount"
+          min="0"
+          step="0.01"
+        />
         <div class="modal-actions">
           <button class="btn-cancel">Cancel</button>
           <button class="btn-confirm">Confirm</button>
@@ -155,7 +168,13 @@
         <label for="spending-name">Description</label>
         <input type="text" id="spending-name" placeholder="e.g. Cereal" />
         <label for="spending-amount">Amount</label>
-        <input type="number" id="spending-amount" placeholder="Enter amount" min="0" step="0.01" />
+        <input
+          type="number"
+          id="spending-amount"
+          placeholder="Enter amount"
+          min="0"
+          step="0.01"
+        />
         <div class="modal-actions">
           <button class="btn-cancel">Cancel</button>
           <button class="btn-confirm">Confirm</button>

@@ -1,10 +1,26 @@
 let data = {
-  budgetCents: 0,
-  envelopes: [],
+  budgetCents: 10000,
+  envelopes: [
+    {
+      id: 1,
+      name: "food",
+      amountCents: 1000,
+    },
+    {
+      id: 2,
+      name: "Groceries",
+      amountCents: 1000,
+    },
+    {
+      id: 3,
+      name: "Sports",
+      amountCents: 1000,
+    },
+  ],
 };
 
 function convertCents(price) {
-  return Math.round(price * 100);
+  return Math.round(Number(price) * 100);
 }
 
 function getRemainingBudget() {
@@ -37,24 +53,59 @@ function saveData(instence, dataToSave) {
 }
 // { name:, amont:}
 
-function getData(dataType) {
-  if (dataType === "budget") {
+function getData(instence) {
+  if (instence === "budget") {
     return data.budgetCents;
   }
-  if (dataType === "envelopes") {
+  if (instence === "envelopes") {
     return data.envelopes;
   }
 }
 
-function isValideMoney(amount) {
-  const num = Number(amount);
-  return Number.isFinite(num) && num > 0 && Math.round(num * 100) / 100 === num;
+function updateData(instence, id, newObject) {
+  if (instence === "envelopes") {
+    const index = data.envelopes.findIndex((e) => {
+      return e.id === id;
+    });
+    data.envelopes[index] = newObject;
+    // returning the whole envelopes array temporary
+    return data.envelopes;
+  }
+}
+
+function deleteData(instence, id) {
+  if (instence === "envelopes") {
+    const index = data.envelopes.findIndex((e) => {
+      return e.id === id;
+    });
+    data.envelopes.splice(index, 1);
+    // returning the whole envelopes array temporary
+    return data.envelopes;
+  }
+}
+
+function getDataById(instence, id) {
+  if (instence === "envelopes") {
+    return data.envelopes.find((e) => {
+      return e.id === Number(id);
+    });
+  }
+}
+
+function isValidMoney(value) {
+  const num = Number(value);
+  return (
+    Number.isFinite(value) && num > 0 && Math.round(num * 100) / 100 === num
+  );
 }
 
 module.exports = {
   convertCents,
   saveData,
-  isValideMoney,
+  isValidMoney,
   getData,
   getRemainingBudget,
+  getDataById,
+  updateData,
+  deleteData,
 };

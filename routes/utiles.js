@@ -1,23 +1,11 @@
 let data = {
-  budgetCents: 10000,
-  envelopes: [
-    {
-      id: 1,
-      name: "food",
-      amountCents: 1000,
-    },
-    {
-      id: 2,
-      name: "Groceries",
-      amountCents: 1000,
-    },
-    {
-      id: 3,
-      name: "Sports",
-      amountCents: 1000,
-    },
-  ],
+  budgetCents: 0,
+  envelopes: [],
+  spendings: [],
 };
+
+let nextEnvelopeId = data.envelopes.length + 1;
+let nextSpendingId = data.spendings.length + 1;
 
 function convertCents(price) {
   return Math.round(Number(price) * 100);
@@ -34,6 +22,25 @@ function getRemainingBudget() {
   return RemainingBudgetCents;
 }
 
+function getEnvelopeRemaingBudgetCents(envelopeId) {
+  let totalSpendingsCents = 0;
+
+  const envelope = data.envelopes.find((e) => {
+    return e.id === Number(envelopeId);
+  });
+
+  const spendingsForEnvelope = data.spendings.filter((e) => {
+    return e.envelopeId === Number(envelopeId);
+  });
+
+  spendingsForEnvelope.forEach((s) => {
+    totalSpendingsCents += s.amountCents;
+  });
+
+  const reamingEnvelopeAmountCents = envelope.amountCents - totalSpendingsCents;
+  return reamingEnvelopeAmountCents;
+}
+
 function saveData(instence, dataToSave) {
   if (instence === "budget") {
     data.budgetCents = dataToSave;
@@ -42,23 +49,45 @@ function saveData(instence, dataToSave) {
 
   if (instence === "envelopes") {
     const newEnvelope = {
-      id: data.envelopes.length + 1,
+      id: nextEnvelopeId,
       name: dataToSave.name,
       amountCents: dataToSave.amountCents,
     };
+    nextEnvelopeId += 1;
 
     data.envelopes.push(newEnvelope);
     return newEnvelope;
   }
+
+  if (instence === "spendings") {
+    // dataToSave {name:, amountCents:, envelopeId:}
+    const newSpending = {
+      id: nextSpendingId,
+      envelopeId: dataToSave.envelopeId,
+      name: dataToSave.name,
+      amountCents: dataToSave.amountCents,
+    };
+    nextSpendingId += 1;
+    data.spendings.push(newSpending);
+    return data.spendings;
+  }
 }
 // { name:, amont:}
 
-function getData(instence) {
+function getData(instence, id) {
   if (instence === "budget") {
     return data.budgetCents;
   }
   if (instence === "envelopes") {
     return data.envelopes;
+  }
+  if (instence === "spendings" && id) {
+    return data.spendings.filter((s) => {
+      return s.envelopeId === Number(id);
+    });
+  }
+  if (instence === "spendings") {
+    return data.spendings;
   }
 }
 
@@ -73,8 +102,8 @@ function updateData(instence, id, newObject) {
   }
 }
 
-function deleteData(instence, id) {
-  if (instence === "envelopes") {
+function deleteData(instence, id, isSpecificSp) {
+  if (instence === "envelopes" && id) {
     const index = data.envelopes.findIndex((e) => {
       return e.id === id;
     });
@@ -82,10 +111,31 @@ function deleteData(instence, id) {
     // returning the whole envelopes array temporary
     return data.envelopes;
   }
+  // only deletes spendings for a specific envelope
+  if (instence === "Allspendings" && id && !isSpecificSp) {
+    // the id is the envelopes'id
+    const removeSpendingsForEnvelopeId = data.spendings.filter((s) => {
+      return s.envelopeId !== Number(id);
+    });
+    data.spendings = removeSpendingsForEnvelopeId;
+    return data.spendings;
+  }
+  // delete all spendings for all envelopes
+  if (instence === "spendings" && !isSpecificSp) {
+    data.spendings = [];
+    return data.spendings;
+  }
+  if (instence === "spendings" && id && isSpecificSp) {
+    const spendingIndex = data.spendings.findIndex((s) => {
+      return s.id === Number(id);
+    });
+    data.spendings.splice(spendingIndex, 1);
+    return data.spendings;
+  }
 }
 
 function getDataById(instence, id) {
-  if (instence === "envelopes") {
+  if (instence === "envelopes" && id) {
     return data.envelopes.find((e) => {
       return e.id === Number(id);
     });
@@ -108,4 +158,5 @@ module.exports = {
   getDataById,
   updateData,
   deleteData,
+  getEnvelopeRemaingBudgetCents,
 };

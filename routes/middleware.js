@@ -112,32 +112,31 @@ function validateEnvlope(req, res, next) {
 }
 
 function validateSpending(req, res, next) {
-  if (!req.body || Object.keys(req.body).length === 0) {
-    return res.status(400).json({
-      success: false,
-      message: "Request body cannot be empty.",
-    });
-  }
-
-  const { name, amount } = req.body;
-  if (!name || !amount) {
-    res.send("Some properties are missing");
-    return;
-  }
-  const spendingAmountCents = convertCents(amount);
-  const reamingEnvelopeAmountCents = getEnvelopeRemaingBudgetCents(
-    req.envelope.id,
-  );
-
-  if (spendingAmountCents > reamingEnvelopeAmountCents) {
-    res.send(
-      `remaing budget for this envelope(${req.envelope.name}) is ${reamingEnvelopeAmountCents} cents`,
+  try {
+    const { name, amount } = req.body || {};
+    if (!name || !amount) {
+      return res.status(400).json({
+        success: false,
+        message: "Some properties are missing",
+      });
+    }
+    const spendingAmountCents = convertCents(amount);
+    const reamingEnvelopeAmountCents = getEnvelopeRemaingBudgetCents(
+      req.envelope.id,
     );
-    return;
+
+    if (spendingAmountCents > reamingEnvelopeAmountCents) {
+      return res.status(400).json({
+        success: false,
+        message: `Remaining budget for "${req.envelope.name}" is $${(reamingEnvelopeAmountCents / 100).toFixed(2)}`,
+      });
+    }
+    req.spendingName = name;
+    req.spendingAmountCents = spendingAmountCents;
+    next();
+  } catch (err) {
+    next(err);
   }
-  req.spendingName = name;
-  req.spendingAmountCents = spendingAmountCents;
-  next();
 }
 
 function findEnvelope(req, res, next, envelopeId) {

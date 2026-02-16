@@ -311,7 +311,7 @@ describe("validateSpending", () => {
     let called = false;
     validateSpending(req, res, () => { called = true; });
     assert.equal(called, false);
-    assert.ok(String(res.body).includes("remaing budget"));
+    assert.ok(res.body.message.includes("Remaining budget"));
   });
 });
 

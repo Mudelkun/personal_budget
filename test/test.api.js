@@ -315,8 +315,9 @@ describe("Spendings API", () => {
       name: "TooBig",
       amount: 999999,
     });
-    const text = await res.text();
-    assert.ok(text.includes("remaing budget"));
+    assert.equal(res.status, 400);
+    const data = JSON.parse(await res.text());
+    assert.ok(data.message.includes("Remaining budget"));
   });
 
   it("POST /spendings/:envelopeId should return 404 for non-existent envelope", async () => {

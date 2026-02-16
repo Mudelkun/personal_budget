@@ -6,7 +6,7 @@
   "author": "Rodarly Perilus",
   "main": "app.js",
   "scripts": {
-    "test": "node test.js",
+    "test": "node --test test/*.js",
     "start": "node app.js",
     "dev": "nodemon app.js",
     "seed": "node routes/seed.js"

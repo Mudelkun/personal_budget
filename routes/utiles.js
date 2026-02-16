@@ -11,6 +11,14 @@ function convertCents(price) {
   return Math.round(Number(price) * 100);
 }
 
+function getTotalEnvelopesBudget() {
+  let totalEnvelopesBudgetCents = 0;
+  data.envelopes.forEach((e) => {
+    totalEnvelopesBudgetCents += e.amountCents;
+  });
+  return totalEnvelopesBudgetCents;
+}
+
 function getRemainingBudget() {
   let totalEnvelopesBudgetCents = 0;
 
@@ -44,7 +52,7 @@ function getEnvelopeRemaingBudgetCents(envelopeId) {
 function saveData(instence, dataToSave) {
   if (instence === "budget") {
     data.budgetCents = dataToSave;
-    return data;
+    return data.budgetCents;
   }
 
   if (instence === "envelopes") {
@@ -69,7 +77,7 @@ function saveData(instence, dataToSave) {
     };
     nextSpendingId += 1;
     data.spendings.push(newSpending);
-    return data.spendings;
+    return newSpending;
   }
 }
 // { name:, amont:}
@@ -97,8 +105,7 @@ function updateData(instence, id, newObject) {
       return e.id === id;
     });
     data.envelopes[index] = newObject;
-    // returning the whole envelopes array temporary
-    return data.envelopes;
+    return data.envelopes[index];
   }
 }
 
@@ -108,8 +115,7 @@ function deleteData(instence, id, isSpecificSp) {
       return e.id === id;
     });
     data.envelopes.splice(index, 1);
-    // returning the whole envelopes array temporary
-    return data.envelopes;
+    return;
   }
   // only deletes spendings for a specific envelope
   if (instence === "Allspendings" && id && !isSpecificSp) {
@@ -140,6 +146,11 @@ function getDataById(instence, id) {
       return e.id === Number(id);
     });
   }
+  if (instence === "spendings" && id) {
+    return data.spendings.find((s) => {
+      return s.id === Number(id);
+    });
+  }
 }
 
 function isValidMoney(value) {
@@ -159,4 +170,5 @@ module.exports = {
   updateData,
   deleteData,
   getEnvelopeRemaingBudgetCents,
+  getTotalEnvelopesBudget,
 };

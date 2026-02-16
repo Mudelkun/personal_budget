@@ -27,7 +27,8 @@ async function seed() {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ budget: seedData.budget }),
   });
-  console.log("Budget:", await budgetRes.text());
+  const budgetData = await budgetRes.json();
+  console.log("Budget:", budgetData.budgetCents);
 
   // 2. Create envelopes
   const envelopeIds = [];
@@ -37,7 +38,7 @@ async function seed() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name: envelope.name, amount: envelope.amount }),
     });
-    const data = await res.json();
+    const { data } = await res.json();
     envelopeIds.push(data.id);
     console.log(`Envelope: ${data.name} (id: ${data.id})`);
   }
